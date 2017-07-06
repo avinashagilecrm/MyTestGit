@@ -1,7 +1,64 @@
 <html>
 <head>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+ <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
 </head>
 <body>
-<p> HELLO WORLD</p>
+<div id="orange">
+<form align="center">
+	
+<label>FIRST NAME :</label> 
+<input type="text" name="firstname" id="firstname">	<br>
+<label>LAST NAME :</label> 
+<input type="text" name="lastname" id="lastname"><br>
+<label>EMAIL ID :</label>
+<input type="text" name="emailid" id="emailid">	<br>
+<label>MOBILE NO :</label> <input type="text" name="mobileno" id="mobileno" onkeypress="mobileTest();">	<br>
+<label> AGE :</label><input type="text" name="age" id="age" maxlength="3"  onkeypress="ageTest();">		<br>
+<input type="submit" name="submit" title="submit" maxlength="10" onclick="onSubmit()";>
+</form>
+</div>
 </body>
+<script type="text/javascript">
+
+	function onSubmit(){
+var op=document.getElementById('age').value;
+var mob=document.getElementById('mobileno').value;
+
+if(mob.length==0){
+alert("Mobile number should not be empty");
+}
+else if(op.length==0){
+alert("Age field should not be empty");
+}
+ 
+else if(isNaN(op)){3
+alert('Age should numbers');
+}else if(op.length>3){
+	alert("Age should be between 1 to 100")
+	}
+	if(isNaN(mob)){
+alert("Mobile number should be digits")
+	}else if(mob.length>10 && mob.length< 10){
+alert("Moble number should contain 10 digits");
+	}
+
+}
+	function ageTest(){
+var oop=document.getElementById('age').value;
+if(isNaN(oop)){
+alert('Age should numbers');
+}else if(oop.length>3){
+	alert("Age should be between 1 to 100")
+	}
+}
+function mobileTest() {
+	var mobi=document.getElementById('mobileno').value;
+	if(isNaN(mobi)){
+alert("Mobile number should be digits")
+	}else if(mobi.length>10 && mobi.length<10){
+alert("Moble number should contain 10 digits");
+	}
+}
+</script>
 </html>
