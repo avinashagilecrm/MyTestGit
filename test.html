@@ -1,0 +1,201 @@
+<html>
+
+   <head>
+      <title>Sample  Registration Form</title>
+      <link rel="stylesheet" href="css/demo.css">    
+   </head>
+	
+   <style type="text/css">
+      span{
+             color: red;
+      }
+      div{
+        background-color: #eff0f1;
+
+      }
+      form,fieldset{
+        text-align: -webkit-center;
+        border-style: none;
+      }
+      .submit{
+            width: auto ! important;
+      }
+      #cemail{
+            margin-left: 25px;
+      }
+      #gender{
+           margin-left: -110px;
+                 }
+                  
+      #male, #female,#english,#telugu,#other,#hindi{
+            height: 20px;
+            width: 40px;
+}
+
+#address{
+    margin-left:55px;
+    margin-bottom: -20px;
+}
+#submit{
+  margin-top: 20px ! important;
+}
+      }
+   </style>
+   <body>
+
+<div id="errorMsg" align="center">
+  <span id='sfname' style="display:none" >FirstName is Empty</span>
+  <span id='slname' style="display:none">LastName is Empty</span>
+  <span id='sph' style="display:none">Mobile Number is Manditory</span>
+  <span id='semail' style="display:none">Enter Email ID</span>
+  <span id='spwd' style="display:none">Enter Password</span>
+
+</div>
+<form id="commentForm" novalidate=true method="post" action="serverexamle">
+  <fieldset id="fieldset">
+   
+     <p>
+      <label for="fname"> First Name :</label><span >*</span>
+      <input id="fname" name="Fname" minlength="7" type="text" placeholder='Enter First Name' required>
+    </p>
+    <p>
+      <label for="lname"> Last Name :</label><span >*</span>
+      <input id="lname" name="Lname" minlength="7" type="text" placeholder='Enter Last Name' required>
+    </p>
+
+     <p>
+      <label > Mobile No :</label><span >*</span>
+      <input id="mobileno"  name="phoneNumber"  type="text" placeholder="e.g. +1 702 123 4567" required></p>
+   <p>
+      <label for="cemail">E-Mail :</label><span >*</span>
+      <input id="cemail" type="email" name="email" placeholder='Enter Email ID' required>
+    </p>
+ 
+      <p>
+      <label for="password"> Password :</label><span >*</span>
+      <input id="password" minlength="10" type="password" required>
+    </p> 
+   <p>
+   <label for="gender" id="gender"> Gender :</label><span >*</span>
+        <input type='radio' id='male' name='type' value='Male' checked="true" />Male
+        <input type='radio' id='female' name='type' value='Female' />Female
+    </p> 
+
+    <p>
+   <label for="languages" id="languages"> Languages Known :</label><span >*</span>
+        <input type='checkbox' id='english' name='type' value='English' checked="true" />English
+        <input type='checkbox' id='telugu' name='type' value='Telugu' />Telugu
+        <input type='checkbox' id='hindi' name='type' value='Hindi' />Hindi
+        <input type='checkbox' id='other' name='type' value='Other' />Other
+    </p> 
+    <p>
+      <label for="address" id="address">Address :</label>
+      <textarea rows="4" cols="40" name="address" id="address" placeholder="Enter Address here..."></textarea>
+    </p>
+   
+
+    <p> 
+      <input class="submit" type="button" value="Submit" id="submit" onclick="valid();">
+    </p>
+  </fieldset>
+</form>
+<script type = "text/javascript" src = "js/jquery.min.js"></script>
+<script>
+
+function valid(){
+  var intRegex = /^\d+$/;
+  var ph=$("#mobileno").val();
+  var obj= intRegex.test(ph);
+  var emailFilter = /^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/;
+if($("#fname").val()==""){
+  $("#sfname").css("display","block");
+  $("#sfname").text("FirstName is empty");
+}else if($("#fname").val().length<5){
+  $("#sfname").css("display","block");
+  $("#sfname").text("Minimum 5 characters sholud be there for FirstName");
+}
+
+else{
+      $("#sfname").css("display","none");
+
+      if($("#lname").val()==""){
+       $("#slname").css("display","block");
+       $("#slname").text("LastName is empty");
+    }else if($("#lname").val().length<5){
+      $("#slname").css("display","block");
+      $("#slname").text("Minimum 5 characters sholud be there for LastName");
+    }else{
+      $("#slname").css("display","none"); 
+      
+      if($("#mobileno").val()==""){
+        $("#sph").css("display","block");
+        $("#sph").text("Mobile No is Empty");
+      }else if (!obj){
+       // alert("text");
+        $("#sph").css("display","block");
+        $("#sph").text("Mobile No should be Digits");
+      }else if(obj){
+       // alert("number");
+            $("#sph").css("display","none"); 
+
+            if(emailFilter.test($("#cemail").val())){
+              $("#semail").css("display","none"); 
+              //alert("ALL ARE CORRECT");   
+              $("#commentForm").ajaxForm({
+                type: form.attr('method'),
+                url: form.attr('action'),
+                data: value,
+                /*success: function (data) {
+                var result=data;
+              })*/
+              });
+            }else{
+               $("#semail").css("display","block");
+               $("#semail").text("Please Enter Valid Email ID");
+            }
+       }
+   }
+
+  
+}
+/*if($("#lname").val()==""){
+  $("#slname").css("display","block");
+  $("#slname").text("LastName is empty");
+}else if($("#lname").val().length<5){
+  $("#slname").css("display","block");
+  $("#slname").text("Minimum 5 characters sholud be there for LastName");
+}else{
+      $("#slname").css("display","none"); 
+}*/
+
+/*var intRegex = /^\d+$/;
+var ph=$("#mobileno").val();
+var obj=(intRegex.test(ph))
+if($("#mobileno").val()==""){
+  $("#sph").css("display","block");
+  $("#sph").text("Mobile No is Empty");
+}else if (!obj){
+ // alert("text");
+  $("#sph").css("display","block");
+  $("#sph").text("Mobile No should be Digits");
+}else if(obj){
+ // alert("number");
+      $("#sph").css("display","none"); 
+
+
+}*/
+
+
+      /*var emailFilter = /^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/;
+      if(emailFilter.test($("#cemail").val())){
+        $("#semail").css("display","none"); 
+      }else{
+         $("#semail").css("display","block");
+         $("#semail").text("Please Enter Valid Email ID");
+      }*/
+}
+
+  </script>
+   </body>
+	
+</html>
